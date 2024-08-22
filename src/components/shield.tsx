@@ -8,7 +8,7 @@ export function Shield() {
       <Header />
 
       {/* CONTENT */}
-      <main className="container">
+      <main>
         <Outlet />
       </main>
 

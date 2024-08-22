@@ -1,7 +1,13 @@
+import { Hero } from "./hero";
+import { Services } from "./services";
+import { Commitment } from "./commitment";
+
 export function HomePage() {
   return (
-    <div className="center-flex h-screen">
-      <h1 className="underline">Accueil</h1>
-    </div>
+    <>
+      <Hero />
+      <Services />
+      <Commitment />
+    </>
   );
 }

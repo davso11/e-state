@@ -23,8 +23,8 @@ export function Header() {
 
   return (
     <StickyHeadroom scrollHeight={100}>
-      <header>
-        <div className="container flex items-center justify-between py-3">
+      <header className="bg-background">
+        <div className="container flex items-center justify-between py-6">
           {/* TODO: ADD LOGO */}
           <Link to="/">
             <div className="h-9 w-9 rounded-full bg-slate-300" />
