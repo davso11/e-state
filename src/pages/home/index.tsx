@@ -1,6 +1,6 @@
-import { Hero } from "./hero";
-import { Projects } from "./projects";
-import { Commitment } from "./commitment";
+import { Hero } from "./components/hero";
+import { Projects } from "./components/projects";
+import { Commitment } from "./components/commitment";
 
 export function HomePage() {
   return (

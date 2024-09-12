@@ -93,10 +93,16 @@
   }
 }
 
+@layer utilities {
+  .center-flex {
+    @apply flex items-center justify-center;
+  }
+}
+
 #hero-section .swiper-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 128px;
 }
