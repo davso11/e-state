@@ -1,12 +1,12 @@
-import { Hero } from "./hero";
-import { Services } from "./services";
-import { Commitment } from "./commitment";
+import { Hero } from "./components/hero";
+import { Projects } from "./components/projects";
+import { Commitment } from "./components/commitment";
 
 export function HomePage() {
   return (
     <>
       <Hero />
-      <Services />
+      <Projects />
       <Commitment />
     </>
   );

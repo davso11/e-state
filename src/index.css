@@ -83,4 +83,26 @@
   .section-title {
     @apply text-xl font-black text-primary;
   }
+
+  .header-carousel-bullet {
+    @apply inline-block h-2.5 w-2.5 rounded-full bg-white;
+  }
+
+  .header-carousel-bullet-active {
+    @apply h-4 w-4 bg-blue-500;
+  }
+}
+
+@layer utilities {
+  .center-flex {
+    @apply flex items-center justify-center;
+  }
+}
+
+#hero-section .swiper-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 6px;
+  margin-bottom: 128px;
 }
