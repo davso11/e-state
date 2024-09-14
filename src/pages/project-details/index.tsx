@@ -115,7 +115,8 @@ export const ProjectDetailsPage = () => {
                       muted
                       autoPlay
                       controls
-                    ></video>
+                      loop
+                    />
                   </div>
                 </DialogContent>
               </Dialog>

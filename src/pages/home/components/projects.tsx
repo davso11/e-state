@@ -1,57 +1,19 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { saveAs } from "file-saver";
+import { Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { MapPin } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
-
-const PROJECTS = [
-  {
-    id: 1,
-    title: "Equinoxe",
-    location: "Abidjan",
-    status: {
-      label: "En construction",
-      value: "in_progress",
-    },
-    thumbnail:
-      "https://www.lp-promotion.com/sites/default/files/public/styles/card/public/program/thumbnail/prog_Vignette-equinoxe.jpg.webp?itok=yqPCytya",
-    price: 53_000_000,
-  },
-  {
-    id: 2,
-    title: "Pure Hre",
-    location: "Abidjan",
-    status: {
-      label: "Derneire opportunité",
-      value: "available",
-    },
-    thumbnail:
-      "https://www.lp-promotion.com/sites/default/files/public/styles/card/public/program/thumbnail/prog_Vignette-pure.jpg.webp?itok=nF6_nNyE",
-    price: 67_000_000,
-  },
-  {
-    id: 3,
-    title: "Etincelles",
-    location: "Azaguié",
-    status: {
-      label: "Disponible pour achat",
-      value: "available",
-    },
-    thumbnail:
-      "https://www.lp-promotion.com/sites/default/files/public/styles/card/public/program/thumbnail/prog_Vignette-equinoxe.jpg.webp?itok=yqPCytya",
-    price: 16_000_000,
-  },
-  {
-    id: 4,
-    title: "Terra Sylva",
-    location: "San Pedro",
-    status: {
-      label: "Lancement commercial",
-      value: "commercial_launch",
-    },
-    thumbnail:
-      "https://www.lp-promotion.com/sites/default/files/public/styles/card/public/program/thumbnail/prog_Vignette-terra-sylva.jpg.webp?itok=aRWU6gnl",
-    price: 47_000_000,
-  },
-] as const;
+import { PUBLIC_PROJECTS } from "@/constants/projects";
+import plan from "/assets/docs/bouake.pdf";
+import { BookingForm } from "@/components/booking-form";
+import { useState } from "react";
 
 const ProjectCard = ({
   price,
@@ -59,7 +21,13 @@ const ProjectCard = ({
   status,
   title,
   thumbnail,
-}: (typeof PROJECTS)[number]) => {
+}: (typeof PUBLIC_PROJECTS)[number]) => {
+  const [openBookingDialog, setOpenBookingDialog] = useState(false);
+
+  const downloadPlan = () => {
+    saveAs(plan, "plan.pdf");
+  };
+
   return (
     <div className="overflow-hidden rounded-xl border shadow shadow-gray-200">
       <div className="relative">
@@ -87,33 +55,112 @@ const ProjectCard = ({
         </div>
 
         {/* ACTION BUTTONS */}
-        <div className="mt-4 space-x-2">
-          {status.value === "available" ? (
-            <Button
-              pill
-              size="sm"
-              variant="outline"
-            >
-              Visite Virtuelle
-            </Button>
-          ) : (
-            <>
+        <div className="mt-4 flex w-full items-center">
+          <div>
+            {status.value === "available" ? (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    pill
+                    size="sm"
+                    variant="outline"
+                  >
+                    Visite Virtuelle
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-screen-md">
+                  <DialogHeader>
+                    <DialogTitle>Visite virtuelle - {title}</DialogTitle>
+                    <DialogDescription>
+                      Découvrez le projet en 3D.
+                    </DialogDescription>
+                  </DialogHeader>
+
+                  <div className="overflow-hidden rounded-lg">
+                    <video
+                      src="/assets/videos/visite-3d.mp4"
+                      muted
+                      autoPlay
+                      controls
+                      loop
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
+            ) : (
+              <>
+                <Button
+                  pill
+                  size="sm"
+                  variant="outline"
+                  onClick={downloadPlan}
+                >
+                  Plan 2D
+                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      pill
+                      size="sm"
+                      variant="outline"
+                    >
+                      Visite 3D
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-screen-md">
+                    <DialogHeader>
+                      <DialogTitle>Visite virtuelle - {title}</DialogTitle>
+                      <DialogDescription>
+                        Découvrez le projet en 3D.
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="overflow-hidden rounded-lg">
+                      <video
+                        src="/assets/videos/visite-3d.mp4"
+                        muted
+                        autoPlay
+                        controls
+                        loop
+                      />
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </>
+            )}
+          </div>
+
+          <Dialog
+            open={openBookingDialog}
+            onOpenChange={setOpenBookingDialog}
+          >
+            <DialogTrigger asChild>
               <Button
                 pill
                 size="sm"
                 variant="outline"
+                className="ml-auto space-x-2 border-emerald-200 bg-emerald-50 text-emerald-500 hover:bg-emerald-50 hover:text-emerald-600"
               >
-                Visite 2D
+                <Mail size={16} />
+                <span>RDV</span>
               </Button>
-              <Button
-                pill
-                size="sm"
-                variant="outline"
-              >
-                Visite 3D
-              </Button>
-            </>
-          )}
+            </DialogTrigger>
+            <DialogContent className="max-w-screen-sm">
+              <DialogHeader>
+                <DialogTitle>
+                  Prendre un rendez-vous pour{" "}
+                  <span className="text-primary">{title}</span>
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  Contactez-nous pour planifier une visite.
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="pt-3">
+                <BookingForm onBooked={() => setOpenBookingDialog(false)} />
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>
@@ -136,7 +183,7 @@ export function Projects() {
 
         {/* CARDS */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {PROJECTS.map((project) => (
+          {PUBLIC_PROJECTS.map((project) => (
             <ProjectCard
               key={project.title}
               {...project}

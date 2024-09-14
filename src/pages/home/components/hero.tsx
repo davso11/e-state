@@ -1,13 +1,23 @@
+import { saveAs } from "file-saver";
 import { Link } from "react-router-dom";
 import { Fullscreen, MapPin, Rotate3D } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { ActivityIndicator } from "@/components/activity-indicator";
 import { useProperty } from "@/services/property/hooks";
 import { CircularProgress } from "@/components/circular-progress";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
+import plan from "/assets/docs/bouake.pdf";
 
 const AUTOPLAY_DELAY = 5000;
 
@@ -15,6 +25,10 @@ export function Hero() {
   const { status, data: property } = useProperty(1, {
     q: { medias: "1", progress: "1" },
   });
+
+  const downloadPlan = () => {
+    saveAs(plan, "plan.pdf");
+  };
 
   if (status === "error") {
     return (
@@ -60,7 +74,7 @@ export function Hero() {
                 src={url}
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0 flex justify-center bg-black/50" />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -72,35 +86,53 @@ export function Hero() {
               to="#"
               className="flex flex-col items-center"
             >
-              <Button
-                pill
-                size="icon"
-                variant="secondary"
-                className="h-14 w-14"
-              >
-                <Rotate3D size={32} />
-              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    pill
+                    size="icon"
+                    variant="secondary"
+                    className="h-14 w-14"
+                  >
+                    <Rotate3D size={32} />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-screen-md">
+                  <DialogHeader>
+                    <DialogTitle>Visite 3D</DialogTitle>
+                    <DialogDescription>
+                      Découvrez le projet en 3D.
+                    </DialogDescription>
+                  </DialogHeader>
+
+                  <div className="overflow-hidden rounded-lg">
+                    <video
+                      src="/assets/videos/visite-3d.mp4"
+                      muted
+                      autoPlay
+                      controls
+                      loop
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
               <span className="mt-2 text-sm font-bold text-white">
-                Maquette 3D
+                Visite 3D
               </span>
             </Link>
 
-            <Link
-              to="#"
-              className="flex flex-col items-center"
-            >
+            <div className="flex cursor-pointer flex-col items-center">
               <Button
                 pill
                 size="icon"
                 variant="secondary"
                 className="h-14 w-14"
+                onClick={downloadPlan}
               >
                 <Fullscreen size={32} />
               </Button>
-              <span className="mt-2 text-sm font-bold text-white">
-                Maquette 2D
-              </span>
-            </Link>
+              <span className="mt-2 text-sm font-bold text-white">Plan 2D</span>
+            </div>
 
             <div className="flex flex-col items-center text-white">
               <CircularProgress
@@ -167,6 +199,14 @@ export function Hero() {
               <Button variant="lime">En savoir plus</Button>
             </div>
           </div>
+        </div>
+
+        <div className="absolute bottom-60 left-1/2 z-50 hidden w-full -translate-x-1/2 transform px-8 text-white lg:block">
+          <h1 className="text-center text-6xl font-bold">
+            L’Excellence au Service de
+            <br />
+            Vos Projets Immobiliers
+          </h1>
         </div>
       </div>
 

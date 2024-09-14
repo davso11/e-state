@@ -58,3 +58,13 @@ export type AuthData = {
   user: Pick<User, "id" | "firstName" | "lastName" | "email" | "phone">;
   token: string;
 };
+
+export type Booking = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  date: string;
+  message: string | null;
+  createdAt: string;
+};

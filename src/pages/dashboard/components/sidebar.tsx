@@ -19,7 +19,7 @@ export const DashboardSidebar = () => {
       <div className="flex h-full flex-col">
         {/* LOGO */}
         <Link
-          to="/dashboard"
+          to="/"
           className="inline-flex items-center space-x-2"
         >
           <div className="h-9 w-9 rounded-full bg-slate-300" />

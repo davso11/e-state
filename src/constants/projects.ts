@@ -12,3 +12,54 @@ export const PROJECTS = [
     status: "En cours",
   },
 ];
+
+export const PUBLIC_PROJECTS = [
+  {
+    id: 1,
+    title: "Equinoxe",
+    location: "Abidjan",
+    status: {
+      label: "En construction",
+      value: "in_progress",
+    },
+    thumbnail:
+      "https://www.lp-promotion.com/sites/default/files/public/styles/card/public/program/thumbnail/prog_Vignette-equinoxe.jpg.webp?itok=yqPCytya",
+    price: 53_000_000,
+  },
+  {
+    id: 2,
+    title: "Pure Hre",
+    location: "Abidjan",
+    status: {
+      label: "Derneire opportunité",
+      value: "available",
+    },
+    thumbnail:
+      "https://www.lp-promotion.com/sites/default/files/public/styles/card/public/program/thumbnail/prog_Vignette-pure.jpg.webp?itok=nF6_nNyE",
+    price: 67_000_000,
+  },
+  {
+    id: 3,
+    title: "Etincelles",
+    location: "Azaguié",
+    status: {
+      label: "Disponible pour achat",
+      value: "available",
+    },
+    thumbnail:
+      "https://www.lp-promotion.com/sites/default/files/public/styles/card/public/program/thumbnail/prog_Vignette-equinoxe.jpg.webp?itok=yqPCytya",
+    price: 16_000_000,
+  },
+  {
+    id: 4,
+    title: "Terra Sylva",
+    location: "San Pedro",
+    status: {
+      label: "Lancement commercial",
+      value: "commercial_launch",
+    },
+    thumbnail:
+      "https://www.lp-promotion.com/sites/default/files/public/styles/card/public/program/thumbnail/prog_Vignette-terra-sylva.jpg.webp?itok=aRWU6gnl",
+    price: 47_000_000,
+  },
+] as const;
