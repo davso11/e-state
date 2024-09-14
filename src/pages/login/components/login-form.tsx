@@ -41,7 +41,7 @@ export const LoginForm = (props: LoginFormProps) => {
           setIsLogin(false);
           setAuth(data);
           localStorage.setItem("auth", JSON.stringify(data));
-          navigate("/dashboard", { replace: true });
+          navigate("/my-projects", { replace: true });
         },
         async onError(err: any) {
           setIsLogin(false);

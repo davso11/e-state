@@ -7,8 +7,11 @@ import { Shield } from "@/components/shield";
 import { RequireAuth } from "@/components/require-auth";
 import { LoginPage } from "@/pages/login";
 import { RegistrationPage } from "@/pages/register";
-import { DashboardPage } from "@/pages/dashboard";
 import { AuthLayout } from "@/components/auth-layout";
+import { DashboardLayout } from "@/pages/dashboard/components/layout";
+import { MyProjectsPage } from "@/pages/my-projects";
+import { ProfilePage } from "@/pages/profile";
+import { ProjectDetailsPage } from "@/pages/project-details";
 
 export const router = createBrowserRouter([
   {
@@ -49,8 +52,21 @@ export const router = createBrowserRouter([
     element: <RequireAuth />,
     children: [
       {
-        path: "/dashboard",
-        element: <DashboardPage />,
+        element: <DashboardLayout />,
+        children: [
+          {
+            path: "my-projects",
+            element: <MyProjectsPage />,
+          },
+          {
+            path: "/my-projects/:id",
+            element: <ProjectDetailsPage />,
+          },
+          {
+            path: "/profile",
+            element: <ProfilePage />,
+          },
+        ],
       },
     ],
   },

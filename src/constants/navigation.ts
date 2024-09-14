@@ -17,6 +17,19 @@ export const NAV_ITEMS = [
   },
   {
     label: "Mon espace",
-    path: "/dashboard",
+    path: "/my-projects",
+  },
+] as const;
+
+export const DASHBOARD_NAV_ITEMS = [
+  {
+    label: "Projets",
+    path: "/my-projects",
+    _isActive: true,
+  },
+  {
+    label: "Profil",
+    path: "/profile",
+    _isActive: false,
   },
 ] as const;

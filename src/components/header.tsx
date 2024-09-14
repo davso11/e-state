@@ -38,9 +38,19 @@ export function Header() {
       )}
     >
       <div className="container flex items-center justify-between py-4">
-        {/* TODO: ADD LOGO */}
-        <Link to="/">
+        <Link
+          to="/"
+          className="inline-flex items-center space-x-2"
+        >
           <div className="h-9 w-9 rounded-full bg-slate-300" />
+          <span
+            className={cn(
+              "text-lg font-bold text-white",
+              isScrolling && "text-black",
+            )}
+          >
+            Coram Deo
+          </span>
         </Link>
 
         {/* SMALL SCREENS */}
@@ -65,7 +75,7 @@ export function Header() {
               </SheetHeader>
               <nav className="flex flex-col gap-y-4">
                 {NAV_ITEMS.map(({ label, path }) => {
-                  return path === "/dashboard" ? (
+                  return path === "/my-projects" ? (
                     <Button
                       key={path}
                       size="sm"
@@ -106,7 +116,7 @@ export function Header() {
           )}
         >
           {NAV_ITEMS.map(({ label, path }) => {
-            return path === "/dashboard" ? (
+            return path === "/my-projects" ? (
               <Button
                 key={path}
                 size="sm"
