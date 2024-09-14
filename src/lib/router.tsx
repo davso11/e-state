@@ -4,27 +4,53 @@ import { AboutPage } from "@/pages/about";
 import { PortfolioPage } from "@/pages/portfolio";
 import { ContactPage } from "@/pages/contact";
 import { Shield } from "@/components/shield";
+import { RequireAuth } from "@/components/require-auth";
+import { LoginPage } from "@/pages/login";
+import { RegistrationPage } from "@/pages/register";
+import { DashboardPage } from "@/pages/dashboard";
+import { AuthLayout } from "@/components/auth-layout";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <Shield />,
     children: [
       {
-        index: true,
+        path: "/",
         element: <HomePage />,
       },
       {
-        path: "about",
+        path: "/about",
         element: <AboutPage />,
       },
       {
-        path: "portfolio",
+        path: "/portfolio",
         element: <PortfolioPage />,
       },
       {
-        path: "contact",
+        path: "/contact",
         element: <ContactPage />,
+      },
+    ],
+  },
+  {
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegistrationPage />,
+      },
+    ],
+  },
+  {
+    element: <RequireAuth />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <DashboardPage />,
       },
     ],
   },

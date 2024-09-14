@@ -91,6 +91,10 @@
   .header-carousel-bullet-active {
     @apply h-4 w-4 bg-blue-500;
   }
+
+  .desc {
+    @apply text-muted-foreground;
+  }
 }
 
 @layer utilities {
