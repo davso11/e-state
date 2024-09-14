@@ -43,3 +43,18 @@ export type TQueryParams = Partial<{
   medias: TBoolParam;
   progress: TBoolParam;
 }>;
+
+export type User = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type AuthData = {
+  user: Pick<User, "id" | "firstName" | "lastName" | "email" | "phone">;
+  token: string;
+};
